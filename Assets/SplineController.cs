@@ -6,16 +6,16 @@ using UnityEngine;
 public class SplineController : MonoBehaviour
 {
 	[Header("Parameters")]
-	[SerializeField, Range(0.01f, 25f)] private float speed = 5f;
-	[SerializeField, Range(0.01f, 2.5f)] private float threshold = 0.1f;
-	[SerializeField, Range(0.01f, 25f)] private float smooth = 5f;
+	[SerializeField, Range(0.01f, 50f)] private float speed = 5f;
+	[SerializeField, Range(0.1f, 2.5f)] private float threshold = 0.1f;
+	[SerializeField, Range(0.001f, 2f)] private float smooth = 5f;
 
 	[Header("Points")]
 	public List<Vector3> points = new List<Vector3>();
 
 	private int index = 0;
 	private Vector3 target;
-	private Vector3 direction;
+	private Vector3 aim;
 	private Rigidbody rb;
 
 	
@@ -28,7 +28,7 @@ public class SplineController : MonoBehaviour
 	{
 		this.index = 0;
 		this.target = this.points[this.index];
-		this.direction = (this.target - this.rb.position).normalized;
+		this.aim = (this.target - this.rb.position).normalized;
 	}
 
 	void FixedUpdate()
@@ -45,9 +45,10 @@ public class SplineController : MonoBehaviour
 			this.target = this.points[this.index];
 		}
 
-		this.direction = (this.target - this.rb.position).normalized;
+		Vector3 direction = (this.target - this.rb.position).normalized;
+		this.aim = Vector3.RotateTowards(this.aim, direction, this.smooth, 0.0f);
 
-		return this.direction * this.speed;
+		return this.aim * this.speed;
 	}
 
 
