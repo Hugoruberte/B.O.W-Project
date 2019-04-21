@@ -54,7 +54,5 @@ public class EnemyController : MonoBehaviour
 		this.rb.AddForce(this.direction * this.data.speed, ForceMode.Force);
 
 		this.anim.speed = this.data.animationSpeedCurve.Evaluate(this.rb.velocity.magnitude);
-
-		Debug.Log(this.rb.velocity.magnitude);
 	}
 }

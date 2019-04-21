@@ -16,7 +16,7 @@ public class Target : MonoBehaviour
         }
         else
         {
-            Debug.Log.Error("Singleton Score not in the scene !!");
+            Debug.LogError("Singleton Score not in the scene !!");
         }
 
         DeathBehaviour();

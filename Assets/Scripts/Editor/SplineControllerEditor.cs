@@ -30,12 +30,12 @@ public class SplineControllerEditor : Editor
 
 			EditorGUI.BeginChangeCheck();
 
-			Vector3 newPoint = Handles.PositionHandle(script.points[i], Quaternion.identity);
+			Vector3 newPoint = Handles.PositionHandle(script.GetPointRelative(i), Quaternion.identity);
 		
 			if(EditorGUI.EndChangeCheck()) {
 				Undo.RecordObject(script, "Change point");
 
-				script.points[i] = newPoint;
+				script.points[i] = script.SetPointRelative(newPoint);
 			}
 		}
 	}

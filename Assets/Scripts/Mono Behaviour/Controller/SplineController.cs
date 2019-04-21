@@ -9,11 +9,13 @@ public class SplineController : MonoBehaviour
 	[SerializeField, Range(0.01f, 50f)] private float speed = 5f;
 	[SerializeField, Range(0.1f, 2.5f)] private float threshold = 0.1f;
 	[SerializeField, Range(0.001f, 20f)] private float smooth = 5f;
+	[SerializeField] private bool isWorldRelative = false;
 
 	[Header("Points")]
 	public List<Vector3> points = new List<Vector3>();
 
 	private int index = 0;
+	private Vector3 origin;
 	private Vector3 target;
 	private Vector3 aim;
 	private Rigidbody rb;
@@ -26,8 +28,9 @@ public class SplineController : MonoBehaviour
 
 	void Start()
 	{
+		this.origin = transform.position;
 		this.index = 0;
-		this.target = this.points[this.index];
+		this.target = this.GetPointRelative(this.index);
 		this.aim = (this.target - this.rb.position).normalized;
 	}
 
@@ -42,13 +45,35 @@ public class SplineController : MonoBehaviour
 		if(Vector3.Distance(this.rb.position, this.target) < this.threshold) {
 
 			this.index = (this.index + 1) % this.points.Count;
-			this.target = this.points[this.index];
+			this.target = this.GetPointRelative(this.index);
 		}
 
 		Vector3 direction = (this.target - this.rb.position).normalized;
 		this.aim = Vector3.RotateTowards(this.aim, direction, this.smooth * Time.deltaTime, 0.0f);
 
 		return this.aim * this.speed;
+	}
+
+	public Vector3 GetPointRelative(int i)
+	{
+		if(this.isWorldRelative) {
+			return this.points[i];
+		} else {
+			if(Application.isPlaying) {
+				return this.origin + this.points[i];
+			} else {
+				return transform.position + this.points[i];
+			}
+		}
+	}
+
+	public Vector3 SetPointRelative(Vector3 p)
+	{
+		if(this.isWorldRelative) {
+			return p;
+		} else {
+			return p - transform.position;
+		}
 	}
 
 
@@ -69,18 +94,18 @@ public class SplineController : MonoBehaviour
 	void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawSphere(this.points[0], 0.25f);
+		Gizmos.DrawSphere(this.GetPointRelative(0), 0.25f);
 
 		Gizmos.color = Color.yellow;
-		Gizmos.DrawLine(this.points[0], this.points[this.points.Count - 1]);
+		Gizmos.DrawLine(this.GetPointRelative(0), this.GetPointRelative(this.points.Count - 1));
 
 		for(int i = 1; i < this.points.Count; i++) {
 
 			Gizmos.color = Color.red;
-			Gizmos.DrawSphere(this.points[i], 0.25f);
+			Gizmos.DrawSphere(this.GetPointRelative(i), 0.25f);
 
 			Gizmos.color = Color.yellow;
-			Gizmos.DrawLine(this.points[i - 1], this.points[i]);
+			Gizmos.DrawLine(this.GetPointRelative(i - 1), this.GetPointRelative(i));
 		}
 	}
 }
