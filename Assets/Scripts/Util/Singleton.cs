@@ -14,7 +14,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : class
 		}
 		set {
 			if(value != null && _instance != null) {
-				Debug.LogWarning("WARNING : Several instance of {typeof(T)} has been set ! Check it out.");
+				Debug.LogWarning($"WARNING : Several instance of {typeof(T)} has been set ! Check it out.");
 				return;
 			}
 
