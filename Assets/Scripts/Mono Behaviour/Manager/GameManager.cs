@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameManager : Singleton<GameManager>
 {
-	public GameData gameData;
+	private Transform garbage;
 
 	protected override void Awake()
 	{
@@ -17,10 +17,10 @@ public class GameManager : Singleton<GameManager>
 	{
 		GameObject g = new GameObject();
 		g.name = "Garbage";
-		gameData.garbage = g.transform;
+		this.garbage = g.transform;
 	}
 
-	public static void PutInGarbage(GameObject o)
+	public void PutInGarbage(GameObject o)
 	{
 		o.SetActive(false);
 
@@ -29,13 +29,13 @@ public class GameManager : Singleton<GameManager>
 			m.StopAllCoroutines();
 		}
 
-		o.transform.parent = instance.gameData.garbage;
+		o.transform.parent = this.garbage;
 	}
 
-	public static void EmptyTheGarbage()
+	public void EmptyTheGarbage()
 	{
-		Destroy(instance.gameData.garbage.gameObject);
+		Destroy(this.garbage.gameObject);
 
-		instance.CreateNewGarbage();
+		this.CreateNewGarbage();
 	}
 }
