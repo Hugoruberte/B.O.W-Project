@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    //targetPointValue
-    public int pointValue;
+	//targetPointValue
+	[SerializeField, Range(1, 1000)] private int pointValue = 10;
 
-    //when collided with arrow
-    private void ApplyDamage()
-    {
-        if (ScoreHandler.instance != null)
-        {
-            ScoreHandler.instance.AddScoreToPlayer(pointValue);
-        }
-        else
-        {
-            Debug.LogError("Singleton Score not in the scene !!");
-        }
+	//when collided with arrow
+	private void ApplyDamage()
+	{
+		if (ScoreHandler.instance != null)
+		{
+			ScoreHandler.instance.AddScoreToPlayer(pointValue);
+		}
+		else
+		{
+			Debug.LogError("Singleton Score not in the scene !!");
+		}
 
-        DeathBehaviour();
-    }
+		ScreenShakeVR.TriggerShake(5f, 3f);
 
-    protected void DeathBehaviour()
-    {
-        Destroy(gameObject);
-    }
+		this.DeathBehaviour();
+	}
+
+	protected virtual void DeathBehaviour()
+	{
+		Destroy(gameObject);
+	}
 }
