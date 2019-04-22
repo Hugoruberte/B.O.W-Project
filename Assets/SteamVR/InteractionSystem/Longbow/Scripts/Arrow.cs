@@ -50,6 +50,21 @@ namespace Valve.VR.InteractionSystem
 		{
 			if ( released && inFlight )
 			{
+                //if Wind...
+                WindHandler wind = WindHandler.instance;
+                if (wind != null)
+                {
+                    Vector3 windForce = wind.getWindForce();
+
+                    float headPercentage = 0.9f;
+                    float shaftPercentage = 0.1f;
+
+
+
+                    arrowHeadRB.AddForce(windForce * headPercentage);
+                    shaftRB.AddForce(windForce * shaftPercentage);
+                }
+
 				prevPosition = transform.position;
 				prevRotation = transform.rotation;
 				prevVelocity = GetComponent<Rigidbody>().velocity;
