@@ -55,4 +55,9 @@ public class EnemyController : MonoBehaviour
 
 		this.anim.speed = this.data.animationSpeedCurve.Evaluate(this.rb.velocity.magnitude);
 	}
+
+    public void SetTarget(Transform targetToReached)
+    {
+        target = targetToReached;
+    }
 }

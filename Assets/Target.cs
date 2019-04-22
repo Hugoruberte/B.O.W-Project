@@ -12,7 +12,7 @@ public class Target : MonoBehaviour
     {
         if (ScoreHandler.instance != null)
         {
-            ScoreHandler.instance.playerScore += pointValue;
+            ScoreHandler.instance.AddScoreToPlayer(pointValue);
         }
         else
         {
