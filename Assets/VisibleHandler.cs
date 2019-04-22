@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Collider))]
 public class VisibleHandler : MonoBehaviour
 {
     private float nextThresholdTime;
@@ -12,12 +14,13 @@ public class VisibleHandler : MonoBehaviour
 
     public Transform targetBody;
 
-    public Target currentTarget;
+    private Collider currentTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         nextThresholdTime = Time.time + upTime;
+        currentTarget = GetComponent<Collider>();
     }
 
     // Update is called once per frame
