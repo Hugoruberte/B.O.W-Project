@@ -113,7 +113,7 @@ namespace Valve.VR.InteractionSystem
 			float distanceToNockPosition = Vector3.Distance( transform.parent.position, bow.nockTransform.position );
 
 			// If there's an arrow spawned in the hand and it's not nocked yet
-			if ( !nocked )
+			if ( !nocked && currentArrow != null )
 			{
 				// If we're close enough to nock position that we want to start arrow rotation lerp, do so
 				if ( distanceToNockPosition < rotationLerpThreshold )
