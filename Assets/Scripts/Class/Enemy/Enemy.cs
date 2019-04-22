@@ -9,11 +9,8 @@ public class Enemy : Target
 	private EnemyController enemyController;
 	private Rigidbody rb;
 	private Collider cl;
-	private Animator anim;
 	private Renderer rend;
 	private ParticleSystem deathParticle;
-
-	private const float DELAY_BEFORE_FADE_AWAY = 0.625f;
 
 	void Awake()
 	{
@@ -22,7 +19,6 @@ public class Enemy : Target
 		this.cl = GetComponent<Collider>();
 		this.rend = GetComponentInChildren<Renderer>();
 		this.deathParticle = this.GetComponentInChildrenWithName<ParticleSystem>("Death");
-		this.anim = this.enemyController.anim;
 	}
 
 	protected override void DeathBehaviour()
@@ -34,32 +30,10 @@ public class Enemy : Target
 		this.rb.constraints = RigidbodyConstraints.FreezeAll;
 		this.cl.enabled = false;
 
-		this.anim.speed = 0.875f;
-		this.anim.SetTrigger("Death");
+		this.rend.enabled = false;
 		this.deathParticle.Play();
 
-		this.StartCoroutine(this.DeathCoroutine());
-	}
-
-	private IEnumerator DeathCoroutine()
-	{
-		Color from, to, color;
-		float step;
-
-		yield return Yielders.Wait(DELAY_BEFORE_FADE_AWAY);
-
-		// fade away
-		from = this.rend.material.GetColor("_Color");
-		to = new Color(from.r, from.g, from.b, 0f);
-		step = 0f;
-		while(step < 1f) {
-			step += this.enemyController.data.fadeSpeed * Time.deltaTime;
-			color = Color.Lerp(from, to, step);
-			this.rend.material.SetColor("_Color", color);
-			yield return null;
-		}
-		
-		Destroy(gameObject, 5f);
+		Destroy(gameObject, 7.5f);
 	}
 
 	void Update()
