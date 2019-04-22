@@ -11,6 +11,7 @@ public class PopulateInteractableHoverEvents : MonoBehaviour
     private void Awake()
     {
         this.hover = GetComponent<InteractableHoverEvents>();
+
     }
 
     public void Populate()
@@ -30,4 +31,5 @@ public class PopulateInteractableHoverEvents : MonoBehaviour
         ArrowHand arrowHand = FindObjectOfType<ArrowHand>() as ArrowHand;
         arrowHand?.SetHandInBack(false);
     }
+
 }
