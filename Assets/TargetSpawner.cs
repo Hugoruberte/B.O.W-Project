@@ -75,6 +75,8 @@ public class TargetSpawner : MonoBehaviour
         {
             yield return waitBeforeSpawn;
 
+            targetIndex = Random.Range(0, targetsPrefab.Length);
+
             GameObject targetCopy = Instantiate(targetsPrefab[targetIndex], GetSpawnLocation(minSpawn, maxSpawn), new Quaternion());
             targetCopy.transform.LookAt(Player.transform);
 
@@ -85,7 +87,6 @@ public class TargetSpawner : MonoBehaviour
             }
 
             targetCount++;
-            targetIndex = targetCount % targetsPrefab.Length;
             if(targetCount >= targetNumber && targetNumber > 0)
             {
                 stopSpawn = true;
