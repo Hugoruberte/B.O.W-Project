@@ -5,17 +5,33 @@ using Tools;
 
 public class ScoreHandler : Singleton<ScoreHandler>
 {
-    public int winScore = 0;
-    private int playerScore = 0;
+	[Header("Parameters")]
+	public int winScore = 0;
 
-    public void AddScoreToPlayer(int score)
-    {
-        playerScore += score;
-        if(playerScore >= winScore) {
-            //win function...
+	[Header("Score Scriptable Object")]
+	[SerializeField] private ScoreData scoreData = null;
 
-            Debug.Log("You Win !");
-        }
-    }
+	protected override void Awake()
+	{
+		base.Awake();
+
+		this.scoreData.Initialize();
+	}
+
+	void Start()
+	{
+		this.scoreData.score = 0;
+	}
+
+	public void AddScoreToPlayer(int score)
+	{
+		this.scoreData.score += score;
+
+		if(this.scoreData.score >= winScore) {
+			//win function...
+
+			Debug.Log("You Win !");
+		}
+	}
 
 }
