@@ -5,16 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyController : MonoBehaviour
 {
+	public Animator anim { get; private set; }
+
 	[Header("Run towards")]
 	[SerializeField] private Transform target = null;
 
 	[Header("Data")]
-	[SerializeField] private EnemyControllerData data = null;
+	public EnemyControllerData data;
 
 	private Transform tr;
 	private Rigidbody rb;
-	private Animator anim;
 	private Vector3 direction;
+
 
 	void Awake()
 	{
