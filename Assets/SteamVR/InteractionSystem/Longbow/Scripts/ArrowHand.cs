@@ -29,8 +29,10 @@ namespace Valve.VR.InteractionSystem
 
 		private bool allowArrowSpawn = true;
 		private bool nocked;
+        private bool handIsInBack = false;
 
-		private bool inNockRange = false;
+
+        private bool inNockRange = false;
 		private bool arrowLerpComplete = false;
 
 		public SoundPlayOneshot arrowSpawnSound;
@@ -83,6 +85,11 @@ namespace Valve.VR.InteractionSystem
 			return arrow;
 		}
 
+        public void SetHandInBack(bool isInBack)
+        {
+            this.handIsInBack = isInBack;
+        }
+
 
 		//-------------------------------------------------
 		private void HandAttachedUpdate( Hand hand )
@@ -97,7 +104,7 @@ namespace Valve.VR.InteractionSystem
 				return;
 			}
 
-			if ( allowArrowSpawn && ( currentArrow == null ) ) // If we're allowed to have an active arrow in hand but don't yet, spawn one
+			if ( allowArrowSpawn && ( currentArrow == null ) && this.handIsInBack) // If we're allowed to have an active arrow in hand but don't yet, spawn one
 			{
 				currentArrow = InstantiateArrow();
 				arrowSpawnSound.Play();
@@ -172,18 +179,16 @@ namespace Valve.VR.InteractionSystem
 				// If arrow is close enough to the nock position and we're pressing the trigger, and we're not nocked yet, Nock
 				if ( ( distanceToNockPosition < nockDistance ) && hand.controller.GetPress( SteamVR_Controller.ButtonMask.Trigger ) && !nocked )
 				{
-					if ( currentArrow == null )
-					{
-						currentArrow = InstantiateArrow();
-					}
-
-					nocked = true;
-					bow.StartNock( this );
-					hand.HoverLock( GetComponent<Interactable>() );
-					allowTeleport.teleportAllowed = false;
-					currentArrow.transform.parent = bow.nockTransform;
-					Util.ResetTransform( currentArrow.transform );
-					Util.ResetTransform( arrowNockTransform );
+                    if (currentArrow != null)
+                    {
+                        nocked = true;
+                        bow.StartNock(this);
+                        hand.HoverLock(GetComponent<Interactable>());
+                        allowTeleport.teleportAllowed = false;
+                        currentArrow.transform.parent = bow.nockTransform;
+                        Util.ResetTransform(currentArrow.transform);
+                        Util.ResetTransform(arrowNockTransform);
+                    }  
 				}
 			}
 

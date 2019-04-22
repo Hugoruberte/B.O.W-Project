@@ -13,7 +13,7 @@ public class SteamVR_Stats : MonoBehaviour
 {
 	void Awake()
 	{
-		Debug.Log("SteamVR_Stats is deprecated in Unity 2017.2 - REMOVING", transform);
+		Debug.Log("SteamVR_Stats is deprecated in Unity 2017.2 - REMOVING");
 		DestroyImmediate(this);
 	}
 }
