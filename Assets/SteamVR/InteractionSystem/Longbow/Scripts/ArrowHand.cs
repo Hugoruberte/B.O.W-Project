@@ -104,7 +104,7 @@ namespace Valve.VR.InteractionSystem
 				return;
 			}
 
-			if ( allowArrowSpawn && ( currentArrow == null ) && this.handIsInBack) // If we're allowed to have an active arrow in hand but don't yet, spawn one
+			if ( allowArrowSpawn && ( currentArrow == null ) && this.handIsInBack && hand.controller != null && hand.controller.GetHairTriggerDown() ) // If we're allowed to have an active arrow in hand but don't yet, spawn one
 			{
 				currentArrow = InstantiateArrow();
 				arrowSpawnSound.Play();
