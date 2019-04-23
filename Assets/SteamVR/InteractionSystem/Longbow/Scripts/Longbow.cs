@@ -84,6 +84,11 @@ namespace Valve.VR.InteractionSystem
 		private void OnAttachedToHand( Hand attachedHand )
 		{
 			hand = attachedHand;
+            GameModeManager gameModeManager = GameModeManager.instance;
+            if(gameModeManager != null)
+            {
+                gameModeManager.StartGame();
+            }
 		}
 
 
