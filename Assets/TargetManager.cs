@@ -6,7 +6,7 @@ using Tools;
 
 public class TargetManager : Singleton<TargetManager>
 {
-    public UnityEvent onStartGame = new UnityEvent();
+    [HideInInspector] public UnityEvent onStartGame = new UnityEvent();
     private GameModeManager gameModeManager;
 
     private List<GameObject> targets = new List<GameObject>();
