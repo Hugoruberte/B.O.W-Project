@@ -76,7 +76,12 @@ public class SplineController : MonoBehaviour
 		}
 	}
 
-
+    public void Stop()
+    {
+        this.enabled = false;
+        this.rb.constraints = RigidbodyConstraints.FreezeAll;
+        this.rb.velocity = Vector3.zero;
+    }
 
 
 

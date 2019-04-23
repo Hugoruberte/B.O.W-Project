@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: abc3b2d8228567d468d62f2bd1a43022
+guid: c99d5cffa05e07244a33ddb69f210dbb
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -12,7 +12,6 @@ ModelImporter:
     4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
-    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -20,7 +19,7 @@ ModelImporter:
       name: None__target_1_texture_png
     second: {fileID: 2100000, guid: 6abc08189582f8d4d9e34f7d0d69d369, type: 2}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -50,7 +49,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 0.25
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     importVisibility: 0
@@ -73,7 +72,7 @@ ModelImporter:
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
-    normalSmoothAngle: 30
+    normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4

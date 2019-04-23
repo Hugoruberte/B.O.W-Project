@@ -39,17 +39,8 @@ public class TargetSpawner : MonoBehaviour
 
         maxSpawn = transform.position + Scale/2;
 
-        //to Remove
-        BeginGame();
-
+        TargetManager.instance.onStartGame.AddListener(this.BeginGame);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     void BeginGame()
     {

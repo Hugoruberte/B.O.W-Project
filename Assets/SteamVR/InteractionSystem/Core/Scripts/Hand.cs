@@ -675,17 +675,18 @@ namespace Valve.VR.InteractionSystem
 		void Update()
 		{
 			UpdateNoSteamVRFallback();
-
+         
+            
 			GameObject attached = currentAttachedObject;
 			if ( attached )
 			{
-				attached.SendMessage( "HandAttachedUpdate", this, SendMessageOptions.DontRequireReceiver );
-			}
+                attached.SendMessage("HandAttachedUpdate", this, SendMessageOptions.DontRequireReceiver);
+            }
 
 			if ( hoveringInteractable )
 			{
 				hoveringInteractable.SendMessage( "HandHoverUpdate", this, SendMessageOptions.DontRequireReceiver );
-			}
+            }
 		}
 
 

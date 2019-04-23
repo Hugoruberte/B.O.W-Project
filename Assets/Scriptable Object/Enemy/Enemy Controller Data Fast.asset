@@ -66,3 +66,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadeSpeed: 2.5
+  threshold: 2
+  reachPenality: 3

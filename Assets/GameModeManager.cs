@@ -9,12 +9,11 @@ public class GameModeManager : Singleton<GameModeManager>
     private TargetManager targetManager;
     private LeaderBoardSaver leaderBoardSaver;
 
-
-
-    //timer for score
-    private float gameTime;
-
     private float startGameTime;
+    private bool gameIsOver;
+
+
+    [SerializeField] private TimeData timeData = null;
 
 
 
@@ -31,18 +30,38 @@ public class GameModeManager : Singleton<GameModeManager>
     {
         if(targetManager != null)
         {
+            Debug.Log("start game");
             targetManager.ActivateTargets();
         }
 
         startGameTime = Time.time;
+        gameIsOver = false;
+    }
+
+    private void Update()
+    {
+        if(startGameTime == 0f)
+        {
+            return;
+        }
+        if (!gameIsOver)
+        {
+            timeData.time = Time.time - startGameTime;
+        }
     }
 
     //end of game
     public void EndGame()
     {
-        string playerName = "roger";
-        gameTime = Time.time - startGameTime;
-        leaderBoardSaver.AddScore(playerName, gameTime);
+        timeData.time = Time.time - startGameTime;
+        leaderBoardSaver.AddScore(timeData.time);
+        gameIsOver = true;
+
+        UIHandler.instance.DisplayWin();
     }
 
+    public void AddTime(float penality)
+    {
+        startGameTime -= penality;
+    }
 }

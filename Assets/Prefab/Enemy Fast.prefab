@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 192917818407724390}
   serializedVersion: 6
   lengthInSec: 2
-  simulationSpeed: 0.5
+  simulationSpeed: 0.65
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -4820,7 +4820,7 @@ GameObject:
   - component: {fileID: 2922267126124371988}
   - component: {fileID: 2922267126124371989}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy Fast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4884,7 +4884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff836cdff7ae3de4a9fe77690e6cf9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointValue: 10
 --- !u!114 &2922267126124371989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4898,7 +4897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  data: {fileID: 11400000, guid: a18f7d8af00c98d4a835c28ee3361e84, type: 2}
+  data: {fileID: 11400000, guid: 28f42ede578b78f4f90b820542a1ad50, type: 2}
 --- !u!1 &5177363508269983828
 GameObject:
   m_ObjectHideFlags: 0

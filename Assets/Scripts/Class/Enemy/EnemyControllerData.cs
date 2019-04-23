@@ -10,4 +10,8 @@ public class EnemyControllerData : ScriptableObject
 
 	[Header("Death")]
 	[Range(0.01f, 10f)] public float fadeSpeed = 1f;
+
+    [Header("Reach")]
+    [Range(0.01f, 20f)] public float threshold = 1f;
+    [Range(0f, 10f)] public float reachPenality = 3f;
 }

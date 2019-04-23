@@ -16,91 +16,34 @@ public class LeaderBoardSaver : Singleton<LeaderBoardSaver>
     private void Start()
     {
         leaderboard = new LeaderBoard();
-        leaderboard.playerScores = new Dictionary<string, float>();
+        leaderboard.playerScores = new List<float>();
 
         leaderboard = LoadGame();
     }
 
-    void Update()
-    {
-        //example of utlisation
-        /*if (Input.GetKeyDown(KeyCode.V))
-        {
-            AddScore("roger", 100);
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            AddScore("s", 120);
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            AddScore("d", 150);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Dictionary<string, float> tmp;
-            tmp = GetSortedLeaderBoard();
-            foreach(string s in tmp.Keys)
-            {
-                Debug.Log("player score:");
-                Debug.Log(s);
-                Debug.Log(tmp[s]);
-            }
-        }*/
-    }
 
     //leaderboard update
-    public void AddScore(string name, float score)
+    public void AddScore(float score)
     {
-        if (leaderboard.playerScores.ContainsKey(name))
+        int i = 0;
+        bool found = false;
+        while( i < leaderboard.playerScores.Count && !found)
         {
-            if (leaderboard.playerScores[name] < score)
+            if (leaderboard.playerScores[i] < score)
             {
-                leaderboard.playerScores[name] = score;
+                leaderboard.playerScores.Insert(i, score);
+                found = true;
             }
         }
-        else
-        {
-            leaderboard.playerScores.Add(name, score);
-        }
+        SaveGame();
+            
     }
 
 
     //give a sort array
-    public Dictionary<string, float> GetSortedLeaderBoard()
+    public List<float> GetSortedLeaderBoard()
     {
-        Dictionary<string, float> copyLeaderBoard = new Dictionary<string, float>(leaderboard.playerScores);
-
-        Dictionary<string, float> sortedDictionary = new Dictionary<string, float>();
-
-        while (copyLeaderBoard.Keys.Count > 0)
-        {
-            string maxName = "";
-            float maxValue = -1;
-            foreach(string s in copyLeaderBoard.Keys)
-            {
-                if(maxValue == -1 || maxValue < copyLeaderBoard[s])
-                {
-                    maxName = s;
-                    maxValue = copyLeaderBoard[s];
-                }
-            }
-
-            sortedDictionary.Add(maxName, maxValue);
-
-            copyLeaderBoard.Remove(maxName);
-     
-        }
-
-        return sortedDictionary;
+        return leaderboard.playerScores;
     }
 
 

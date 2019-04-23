@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Tools;
 
 public abstract class Target : MonoBehaviour
 {
-	//targetPointValue
-	[SerializeField, Range(1, 1000)] private int pointValue = 10;
-
     private TargetManager targetManager;
 
 	protected Renderer rend;
@@ -17,26 +12,22 @@ public abstract class Target : MonoBehaviour
 	{
 		this.rend = GetComponentInChildren<Renderer>();
 		this.deathParticle = this.GetComponentInChildrenWithName<ParticleSystem>("Death");
-	}
 
-    private void Start()
-    {
-        targetManager = TargetManager.instance;
+        targetManager = FindObjectOfType<TargetManager>() as TargetManager;
         targetManager.RegisterNewTarget(gameObject);
+
+        gameObject.SetActive(false);
     }
 
     //when collided with arrow
     private void ApplyDamage()
 	{
-		ScoreHandler.instance.AddScoreToPlayer(this.pointValue);
-
-		ScreenShakeVR.TriggerShake(5f, 3f);
-
-
-        targetManager.RemoveTarget(gameObject);
-
+      
 		this.DeathBehaviour();
 	}
 
-	protected abstract void DeathBehaviour();
+	public virtual void DeathBehaviour()
+    {
+        targetManager.RemoveTarget(gameObject);
+    }
 }

@@ -92,7 +92,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void HandAttachedUpdate( Hand hand )
+		public void HandAttachedUpdate( Hand hand )
 		{
 			if ( bow == null )
 			{
@@ -245,8 +245,8 @@ namespace Valve.VR.InteractionSystem
 			currentArrow.GetComponent<Arrow>().ArrowReleased( bow.GetArrowVelocity() );
 			bow.ArrowReleased();
 
-			allowArrowSpawn = false;
-			Invoke( "EnableArrowSpawn", 0.5f );
+			allowArrowSpawn = true;
+			// Invoke("EnableArrowSpawn", 0.05f);
 			StartCoroutine( ArrowReleaseHaptics() );
 
 			currentArrow = null;

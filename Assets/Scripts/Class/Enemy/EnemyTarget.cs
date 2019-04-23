@@ -17,10 +17,14 @@ public class EnemyTarget : Target
 		this.enemyController = GetComponent<EnemyController>();
 		this.rb = GetComponent<Rigidbody>();
 		this.cl = GetComponent<Collider>();
+
+        gameObject.SetActive(true);
 	}
 
-	protected override void DeathBehaviour()
+	public override void DeathBehaviour()
 	{
+        base.DeathBehaviour();
+
 		this.enemyController.StopAllCoroutines();
 		this.enemyController.enabled = false;
 

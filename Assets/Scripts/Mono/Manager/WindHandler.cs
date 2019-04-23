@@ -16,6 +16,8 @@ public class WindHandler : Singleton<WindHandler>
 
     private float windEndTime;
 
+    [SerializeField] private WindData windData = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,13 +43,10 @@ public class WindHandler : Singleton<WindHandler>
     {
         float windSpeed = Random.Range(minSpeed, maxSpeed);
 
-        //TODO; changed direction
         int indexDirection = Random.Range(0, directions.Length);
         Vector3 direction = directions[indexDirection];
 
-        Debug.Log(direction);
-        Debug.Log(windSpeed);
-
+        windData.wind = windSpeed;
 
         windForce = windSpeed * direction;
     }

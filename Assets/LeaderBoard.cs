@@ -6,5 +6,5 @@ using System.Collections.Generic;
 
 public class LeaderBoard
 {
-    public Dictionary<string, float> playerScores;
+    public List<float> playerScores;
 }

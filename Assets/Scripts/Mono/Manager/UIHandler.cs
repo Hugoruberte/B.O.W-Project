@@ -7,25 +7,27 @@ using Tools;
 public class UIHandler : Singleton<UIHandler>
 {
 	[Header("UI Reference")]
-	[SerializeField] private Text scoreValueText = null;
+	[SerializeField] private Text timeValueText = null;
 	[SerializeField] private Text waveValueText = null;
 	[SerializeField] private Text winText = null;
+	[SerializeField] private Text windValueText = null;
 
-	[Header("Parameters")]
+    [Header("Parameters")]
 	[SerializeField, Range(0f, 5f)] private float waitDelayBefore = 1f;
 	[SerializeField, Range(0f, 5f)] private float waitDelayAfter = 1f;
 
-	[Header("Score Scriptable Object")]
-	[SerializeField] private ScoreData scoreData = null;
+	[Header("Scriptable Object")]
+	[SerializeField] private TimeData timeData = null;
+	[SerializeField] private WindData windData = null;
 
-	private IEnumerator waveCoroutine = null;
+    private IEnumerator waveCoroutine = null;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
-		if(scoreValueText == null) {
-			Debug.LogError("ERROR : Need to reference SCORE VALUE text component");
+		if(timeValueText == null) {
+			Debug.LogError("ERROR : Need to reference TIME VALUE text component");
 		}
 		if(waveValueText == null) {
 			Debug.LogError("ERROR : Need to reference WAVE VALUE text component");
@@ -38,14 +40,14 @@ public class UIHandler : Singleton<UIHandler>
 	void Start()
 	{
 		this.InitializeUI();
-
-		this.scoreData.onScoreUpdate.AddListener(this.UpdateScore);
 	}
 
-	public void UpdateScore()
+	private void Update()
 	{
-		scoreValueText.text = this.scoreData.score.ToString();
-	}
+		timeValueText.text = this.timeData.time.ToString("F2");
+        windValueText.text = this.windData.wind.ToString("F1");
+
+    }
 
 	public void DisplayWave(int wave)
 	{
@@ -61,7 +63,7 @@ public class UIHandler : Singleton<UIHandler>
 
 	private void InitializeUI()
 	{
-		this.scoreValueText.text = "0";
+		this.timeValueText.text = "0";
 		this.waveValueText.transform.parent.gameObject.SetActive(false);
 		this.winText.gameObject.SetActive(false);
 	}

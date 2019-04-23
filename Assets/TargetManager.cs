@@ -1,27 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Tools;
 
 public class TargetManager : Singleton<TargetManager>
 {
-
+    public UnityEvent onStartGame = new UnityEvent();
     private GameModeManager gameModeManager;
 
-    private List<GameObject> targets;
+    private List<GameObject> targets = new List<GameObject>();
 
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         gameModeManager = GameModeManager.instance;
-
-        targets = new List<GameObject>();   
     }
 
     public void RegisterNewTarget(GameObject target)
     {
+        Debug.Log("registered");
         targets.Add(target);
     }
 
@@ -30,18 +30,19 @@ public class TargetManager : Singleton<TargetManager>
         targets.Remove(target);
         if (targets.Count <= 0)
         {
+            Debug.Log("endGame");
             gameModeManager.EndGame();
-            
         }
     }
 
     public void ActivateTargets()
     {
-        foreach(GameObject gameObject in targets)
+        foreach(GameObject go in targets)
         {
-            gameObject.SetActive(true);
+            go.SetActive(true);
         }
-        
+
+        onStartGame.Invoke();
     }
 
 }

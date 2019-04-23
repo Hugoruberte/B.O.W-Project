@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc0cbce93a9b0fe45a1273692f816a80, type: 3}
-  m_Name: Enemy Controller Data Super Fast
+  m_Name: Enemy Controller Data Medium
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 7.5
   smoothRun: 0.25
   animationSpeedCurve:
     serializedVersion: 2
@@ -66,3 +66,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadeSpeed: 2.5
+  threshold: 1
+  reachPenality: 3

@@ -122,8 +122,9 @@ namespace Valve.VR.InteractionSystem
 				float rbSpeed = rb.velocity.sqrMagnitude;
 				bool canStick = ( targetPhysMaterial != null && collision.collider.sharedMaterial == targetPhysMaterial && rbSpeed > 0.2f );
 				bool hitBalloon = collision.collider.gameObject.GetComponent<Balloon>() != null;
+                bool hitTarget = collision.collider.gameObject.GetComponent<Target>() != null;
 
-				if ( travelledFrames < 2 && !canStick )
+                if ( travelledFrames < 2 && !canStick )
 				{
 					// Reset transform but halve your velocity
 					transform.position = prevPosition - prevVelocity * Time.deltaTime;
@@ -165,8 +166,13 @@ namespace Valve.VR.InteractionSystem
 					// always pop balloons
 					if ( rbSpeed > 0.1f || hitBalloon )
 					{
-						collision.collider.gameObject.SendMessageUpwards( "ApplyDamage", SendMessageOptions.DontRequireReceiver );
+						collision.collider.gameObject.SendMessageUpwards("ApplyDamage", SendMessageOptions.DontRequireReceiver );
 						gameObject.SendMessage( "HasAppliedDamage", SendMessageOptions.DontRequireReceiver );
+
+                        if (hitTarget)
+                        {
+                            Destroy(gameObject);
+                        }
 					}
 				}
 
