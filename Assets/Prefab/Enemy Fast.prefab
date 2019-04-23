@@ -9769,7 +9769,7 @@ PrefabInstance:
     - target: {fileID: 2563426520964984191, guid: 514578d07c8a32341868c7c92b3f4564,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4999997
+      value: 0.49999964
       objectReference: {fileID: 0}
     - target: {fileID: 2563426520964984191, guid: 514578d07c8a32341868c7c92b3f4564,
         type: 3}

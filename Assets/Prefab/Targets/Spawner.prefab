@@ -45,7 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   targetsPrefab:
-  - {fileID: 2922267126124371993, guid: fff263e70b211414d85ba7fcb2286dc8, type: 3}
+  - {fileID: 2922267126124371993, guid: 750fbe4814f93a04ab70be912afeb2d9, type: 3}
+  - {fileID: 2922267126124371993, guid: 8ecabea8d79150349a4df36fafc6743b, type: 3}
+  - {fileID: 2922267126124371993, guid: f2d6609dbe997e342af21bcb752ff29c, type: 3}
   targetNumber: 5
   initSpawnTime: 2
   Scale: {x: 10, y: 2, z: 2}
