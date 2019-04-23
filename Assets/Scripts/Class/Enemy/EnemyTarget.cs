@@ -4,21 +4,19 @@ using UnityEngine;
 using Tools;
 
 [RequireComponent(typeof(EnemyController))]
-public class Enemy : Target
+public class EnemyTarget : Target
 {
 	private EnemyController enemyController;
 	private Rigidbody rb;
 	private Collider cl;
-	private Renderer rend;
-	private ParticleSystem deathParticle;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
 		this.enemyController = GetComponent<EnemyController>();
 		this.rb = GetComponent<Rigidbody>();
 		this.cl = GetComponent<Collider>();
-		this.rend = GetComponentInChildren<Renderer>();
-		this.deathParticle = this.GetComponentInChildrenWithName<ParticleSystem>("Death");
 	}
 
 	protected override void DeathBehaviour()
@@ -34,12 +32,5 @@ public class Enemy : Target
 		this.deathParticle.Play();
 
 		Destroy(gameObject, 7.5f);
-	}
-
-	void Update()
-	{
-		if(Input.GetKeyDown("space")) {
-			this.DeathBehaviour();
-		}
 	}
 }
